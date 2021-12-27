@@ -2,22 +2,28 @@
 
 Expr = Enumerator.new do |result|
   k = 1
-  #s = 0.0
   loop do
-    #s += ((-1.0)**(k - 1)) / k
-    #result << s
     result << ((-1.0)**(k - 1)) / k
     k += 1
-    #break if ((s - Math.log(2, 2.71828182846)).abs <= 0.0001)
   end
 end
 
 def approx(eps)
-  Expr.take_while { |num| num.abs >= eps}.sum
-  counter = Expr.take_while { |num| num.abs >= eps}.count
-  puts res
-  puts("Количество элементов энумератора #{counter}")
-  return res
+  counter = 0
+  result = 0.0
+  #Expr.take_while { |num| num.abs >= eps}.sum
+  #counter = Expr.take_while { |num| num.abs >= eps}.count
+  Expr.each_with_index do |num,index| 
+   if num.abs >= eps
+     result += num
+     counter += 1 
+   else
+     break
+    end 
+  end
+  puts result
+  puts("Количество итерация #{counter}")
+  result
 end
 
 
